@@ -1,7 +1,6 @@
 package com.example.jpaEcommerceServer.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,11 +29,18 @@ public class Filter {
     @Column(nullable = false)
     private Boolean isRange = false;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    /* I changed the cascade type from all to merge
+     * because with all I am also setting the type to persist
+     * that make when I try to create a filter passing it a category
+     * it also try to create the category, with merge it just will
+     * to update the category */
+    /* I changed the List<Category> to Set<Category> because
+     * a filter should have uniques categories */
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "filter_category",
         joinColumns = @JoinColumn(name = "filter_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> filterCategory = new ArrayList<Category>();
+    private Set<Category> filterCategory;
     
 }
