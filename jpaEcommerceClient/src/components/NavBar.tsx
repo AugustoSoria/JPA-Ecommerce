@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 const categories = ["vehicles", "clothes"]
 
@@ -21,7 +22,12 @@ function NavBar() {
             <h4 style={{"margin": "0 0.5em"}}>Register</h4>
             <div>
                 <h4 style={{"margin": "0 0.5em"}} onClick={() => setShowConfig(!showConfig)}>Config</h4>
-                {showConfig && <ul style={{position: "absolute", padding: "0 1.8em"}}> <li>Products</li> </ul>}
+                {showConfig && 
+                <ul style={{position: "absolute", padding: "0 1.8em"}}> 
+                    <li>
+                        <Link to={"product/create"}>Create Product</Link>
+                    </li>
+                </ul>}
             </div>
         </nav>
     );

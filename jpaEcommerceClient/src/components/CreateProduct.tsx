@@ -1,0 +1,100 @@
+import { useState, useEffect } from "react";
+import { Category } from "../model/Category";
+import { Filter } from "../model/Filter";
+import { categoryApi } from "../api/categoryApi";
+import { filterApi } from "../api/filterApi";
+import { Product } from "../model/Product";
+import { productApi } from "../api/productApi";
+
+interface Form extends HTMLFormElement {
+    text: HTMLInputElement;
+}
+
+function createProduct() {
+    const [categories, setCategories] = useState<Category[]>([])
+    const [selectedCategory, setSelectedCategory] = useState<Category>()
+    const [filters, setFilters] = useState<Filter[]>([])
+
+    useEffect(() => {
+        categoryApi.getCategories()
+            .then(categories => setCategories(categories))
+
+        filterApi.getFilters()
+            .then(filters => setFilters(filters))
+    }, [])
+
+    function handleChangeOption(event: React.ChangeEvent<HTMLSelectElement>) {
+        const categoryId = event.target.value
+        const foundCategory = categories.find(c => c.id?.toString() === categoryId)
+        setSelectedCategory(foundCategory)
+    }
+
+    function create(event: React.ChangeEvent<Form>) {
+        event.preventDefault()
+        if(!selectedCategory) return;
+
+        const filterValues: any = []
+
+        filters.forEach(f => {
+            filterValues.push({
+                value: event.target[f.name].value,
+                filter: f
+            })
+        })
+
+        const newProduct: Product = {
+            name: event.target.productName.value,
+            price: event.target.price.value.replace(/\./g, ""),
+            priceInUsd: event.target.usd.checked,
+            category: selectedCategory,
+            filterValues
+        }
+        console.log("newProduct: ")
+        console.log(newProduct)
+
+        productApi.create(newProduct)
+            .then(resp => resp.ok ? console.log("Product created") : console.log("Product not created"))
+    }
+
+    return (
+        <section>
+            <form className="create-form" onSubmit={create}>
+                <label htmlFor="productName">name</label>
+                <input type="text" name="productName" id="name" />
+
+                <label htmlFor="price">price</label>
+                <input type="number" name="price" id="price" />
+                <div style={{display: "flex"}}>
+                    <input type="radio" name="priceCurrency" id="arg" value="arg" defaultChecked />
+                    <label htmlFor="arg">ARG</label>
+
+                    <input type="radio" name="priceCurrency" id="usd" value="usd" />
+                    <label htmlFor="usd">USD</label>
+                </div>
+
+                <label htmlFor="category">category</label>
+                <select name="category" onChange={(e) => handleChangeOption(e)} defaultValue="">
+                    <option value="" disabled>Choose a category</option>
+                    {
+                        categories.map(c => 
+                            <option key={c.id} value={c.id}>{c.name}</option>)
+                    }
+                </select>
+
+                {   
+                    filters.length ?
+                    filters.map(f => (
+                        <div key={f.id} style={{display: "flex", flexDirection: "column"}}>
+                            <label htmlFor={f.name}>{f.name}</label>
+                            <input type="text" name={f.name} id={f.name} />
+                        </div>
+                    )) : <h4>No se encontraron filtros</h4>
+                }
+
+                <button type="submit">create</button>
+            </form>
+        </section>
+    );
+}
+
+export default createProduct;
