@@ -1,0 +1,28 @@
+version: '2.23'
+services:
+  back-ec:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mysql-ec
+  front-ec:
+    build: ../jpaEcommerceClient
+    ports:
+      - "3000:3000"
+    links:
+      - back-ec
+  mysql-ec:
+    image: mysql
+    ports: 
+      - "3306:3306"
+    command: --init-file /data/init.sql 
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./src/main/resources/init.sql:/data/init.sql
+
+volumes:
+  mysql-data:
