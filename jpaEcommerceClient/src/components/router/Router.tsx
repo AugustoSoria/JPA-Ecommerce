@@ -1,6 +1,8 @@
 import App from "../../App";
 import { createBrowserRouter } from "react-router-dom";
-import CreateProduct from "../CreateProduct";
+import CreaterProduct from "../creater/CreaterProduct";
+import CreaterFilter from "../creater/CreaterFilter";
+import CreaterCategory from "../creater/CreaterCategory";
 
 const router = createBrowserRouter([
     {
@@ -9,7 +11,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "product/create",
-                element: <CreateProduct />,
+                element: <CreaterProduct />,
+            },
+            {
+                path: "category/create",
+                element: <CreaterCategory />,
+            },
+            {
+                path: "filter/create",
+                element: <CreaterFilter />,
             }
         ]
     }

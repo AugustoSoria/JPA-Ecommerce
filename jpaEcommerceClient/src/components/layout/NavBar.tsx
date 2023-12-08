@@ -27,6 +27,12 @@ function NavBar() {
                     <li>
                         <Link to={"product/create"}>Create Product</Link>
                     </li>
+                    <li>
+                        <Link to={"category/create"}>Create Category</Link>
+                    </li>
+                    <li>
+                        <Link to={"filter/create"}>Create Filter</Link>
+                    </li>
                 </ul>}
             </div>
         </nav>

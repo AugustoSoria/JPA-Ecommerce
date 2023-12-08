@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import { Category } from "../model/Category";
-import { Filter } from "../model/Filter";
-import { categoryApi } from "../api/categoryApi";
-import { filterApi } from "../api/filterApi";
-import { Product } from "../model/Product";
-import { productApi } from "../api/productApi";
+import { Category } from "../../model/Category";
+import { Filter } from "../../model/Filter";
+import { categoryApi } from "../../api/categoryApi";
+import { filterApi } from "../../api/filterApi";
+import { Product } from "../../model/Product";
+import { productApi } from "../../api/productApi";
 
-interface Form extends HTMLFormElement {
-    text: HTMLInputElement;
-}
-
-function createProduct() {
+function createrProduct() {
     const [categories, setCategories] = useState<Category[]>([])
     const [selectedCategory, setSelectedCategory] = useState<Category>()
     const [filters, setFilters] = useState<Filter[]>([])
@@ -29,7 +25,7 @@ function createProduct() {
         setSelectedCategory(foundCategory)
     }
 
-    function create(event: React.ChangeEvent<Form>) {
+    function create(event: React.ChangeEvent<HTMLFormElement>) {
         event.preventDefault()
         if(!selectedCategory) return;
 
@@ -97,4 +93,4 @@ function createProduct() {
     );
 }
 
-export default createProduct;
+export default createrProduct;
