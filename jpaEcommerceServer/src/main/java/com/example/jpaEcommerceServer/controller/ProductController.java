@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jpaEcommerceServer.model.Product;
+import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
 import com.example.jpaEcommerceServer.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,12 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<List<Product>> getAll() {
         return ResponseEntity.ok(productService.getAll());
+    }
+
+    @GetMapping("byCriteria") 
+    public ResponseEntity<List<Product>> getAllByCriteria(ProductCriteria criteria) {
+        List<Product> products = productService.getAllByCriteria(criteria);
+        return ResponseEntity.ok(products);
     }
     
     @PostMapping("create")

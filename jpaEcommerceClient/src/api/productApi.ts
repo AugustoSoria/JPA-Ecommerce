@@ -17,6 +17,10 @@ export const productApi = {
         options.body = JSON.stringify(product)
 
         return fetch(URL_BASE + "/create", options)
-    }
+    },
+    getProductsBySearchCriteria: (criteria: URLSearchParams): Promise<Product[]> => {
 
+        return fetch(URL_BASE + "/byCriteria?" + criteria.toString())
+            .then(resp => resp.json())
+    },
 }

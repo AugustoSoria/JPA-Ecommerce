@@ -2,10 +2,14 @@ package com.example.jpaEcommerceServer.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.jpaEcommerceServer.model.Product;
+import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
 import com.example.jpaEcommerceServer.repository.ProductRepository;
+
+import com.example.jpaEcommerceServer.service.specification.ProductSpecification;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +23,11 @@ public class ProductService {
     
     public List<Product> getAll() {
         return productRepository.findAll();
+    }
+
+    public List<Product> getAllByCriteria(ProductCriteria criteria) {
+        Specification<Product> spec = ProductSpecification.productsByCriteria(criteria);
+        return productRepository.findAll(spec);
     }
     
     public Product save(Product product) {
