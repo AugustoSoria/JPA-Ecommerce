@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.example.jpaEcommerceServer.model.Product;
 import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
+import com.example.jpaEcommerceServer.model.entity.Product;
 import com.example.jpaEcommerceServer.repository.ProductRepository;
 
 import com.example.jpaEcommerceServer.service.specification.ProductSpecification;

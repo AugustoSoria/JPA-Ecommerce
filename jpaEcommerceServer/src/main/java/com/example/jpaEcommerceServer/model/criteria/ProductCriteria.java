@@ -8,4 +8,6 @@ import lombok.NoArgsConstructor;
 public class ProductCriteria {
 
     private String category;
+    private String model;
+    private String transmission;
 }

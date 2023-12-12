@@ -1,4 +1,4 @@
-package com.example.jpaEcommerceServer.model;
+package com.example.jpaEcommerceServer.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

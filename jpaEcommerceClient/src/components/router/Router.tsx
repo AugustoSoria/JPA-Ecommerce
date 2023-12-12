@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         element: <App />,
         children: [
             {
-              path: '/:productCategory?',
+              path: '/:categoryName?',
               element: <HomePage/>
             },
             {

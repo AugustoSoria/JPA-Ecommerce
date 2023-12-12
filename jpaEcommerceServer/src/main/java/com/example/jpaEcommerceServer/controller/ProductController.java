@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.jpaEcommerceServer.model.Product;
 import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
+import com.example.jpaEcommerceServer.model.entity.Product;
 import com.example.jpaEcommerceServer.service.ProductService;
 
 import lombok.RequiredArgsConstructor;

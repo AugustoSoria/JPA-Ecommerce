@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.jpaEcommerceServer.model.Filter;
+import com.example.jpaEcommerceServer.model.criteria.FilterCriteria;
+import com.example.jpaEcommerceServer.model.entity.Filter;
 import com.example.jpaEcommerceServer.service.FilterService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ public class FilterController {
     @GetMapping()
     public ResponseEntity<List<Filter>> getAll() {
         return ResponseEntity.ok(filterService.getAll());
+    }
+    
+    @GetMapping("byCriteria")
+    public ResponseEntity<List<Filter>> getAllByCriteria(FilterCriteria criteria) {
+        return ResponseEntity.ok(filterService.getAllByCriteria(criteria));
     }
 
     @PostMapping("create")

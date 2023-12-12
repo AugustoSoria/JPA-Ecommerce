@@ -1,4 +1,4 @@
-package com.example.jpaEcommerceServer.model;
+package com.example.jpaEcommerceServer.model.entity;
 
 import java.math.BigDecimal;
 import java.util.List;

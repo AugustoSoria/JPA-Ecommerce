@@ -1,4 +1,4 @@
-package com.example.jpaEcommerceServer.model;
+package com.example.jpaEcommerceServer.model.entity;
 
 import java.util.Set;
 

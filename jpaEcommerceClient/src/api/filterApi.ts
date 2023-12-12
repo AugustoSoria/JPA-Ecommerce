@@ -17,6 +17,13 @@ export const filterApi = {
             .then((res) => res.json())
 
     },
+    getByCategoryName: (categoryName: string | undefined): Promise<Filter[]> => {
+        if(!categoryName) categoryName = ""
+
+        return fetch(URL_BASE + "/byCriteria?categoryName=" + categoryName)
+            .then((res) => res.json())
+
+    },
     create: (filter: Filter): Promise<Response> => {
 
         options.method = "POST"

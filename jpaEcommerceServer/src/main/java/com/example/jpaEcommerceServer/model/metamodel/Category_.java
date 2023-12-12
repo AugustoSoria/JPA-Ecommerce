@@ -1,6 +1,6 @@
 package com.example.jpaEcommerceServer.model.metamodel;
 
-import com.example.jpaEcommerceServer.model.Category;
+import com.example.jpaEcommerceServer.model.entity.Category;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.SingularAttribute;

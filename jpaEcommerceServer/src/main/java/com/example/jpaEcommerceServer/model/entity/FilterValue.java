@@ -1,4 +1,4 @@
-package com.example.jpaEcommerceServer.model;
+package com.example.jpaEcommerceServer.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="filter_values")
+@Table(name="filter_value")
 public class FilterValue {
 
     @Id

@@ -2,9 +2,9 @@ package com.example.jpaEcommerceServer.model.metamodel;
 
 import java.math.BigDecimal;
 
-import com.example.jpaEcommerceServer.model.Category;
-import com.example.jpaEcommerceServer.model.FilterValue;
-import com.example.jpaEcommerceServer.model.Product;
+import com.example.jpaEcommerceServer.model.entity.Category;
+import com.example.jpaEcommerceServer.model.entity.FilterValue;
+import com.example.jpaEcommerceServer.model.entity.Product;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.ListAttribute;

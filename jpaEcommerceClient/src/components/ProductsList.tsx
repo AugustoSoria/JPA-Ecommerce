@@ -2,23 +2,25 @@ import { useEffect, useState } from "react";
 import { Product } from "../model/Product";
 import { productApi } from "../api/productApi";
 import ProductCard from "./ProductCard";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 function ProductsList() {
     const [products, setProducts] = useState<Product[]>([])
+    const [searchParams] = useSearchParams()
 
-    const { productCategory } = useParams()
+    const { categoryName } = useParams()
 
     useEffect(() => {
-        const paramsCopy = new URLSearchParams()
-        if(productCategory) paramsCopy.set("category", productCategory)
-
+        const paramsCopy = new URLSearchParams(searchParams)
+        if(categoryName) paramsCopy.set("category", categoryName)
+        
         productApi.getProductsBySearchCriteria(paramsCopy)
-            .then(ps => setProducts(ps))
-    }, [])
+            .then(apiProducts => {
+                setProducts(apiProducts)
+            })
 
-    console.log("products")
-    console.log(products)
+    }, [searchParams, categoryName])
+
     if(!products.length) return;
 
     return (

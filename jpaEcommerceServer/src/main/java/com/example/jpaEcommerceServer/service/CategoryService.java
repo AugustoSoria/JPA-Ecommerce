@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.jpaEcommerceServer.model.Category;
+import com.example.jpaEcommerceServer.model.entity.Category;
 import com.example.jpaEcommerceServer.repository.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
