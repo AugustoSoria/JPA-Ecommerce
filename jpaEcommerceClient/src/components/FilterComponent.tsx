@@ -1,21 +1,23 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Filter } from "../model/Filter";
 import { FilterOption } from "../model/FilterOption";
-import { FilterOptionApi } from "../api/filterOptionApi";
-import { useSearchParams } from "react-router-dom";
+import { FilterValueApi } from "../api/filterValueApi";
+import { useParams, useSearchParams } from "react-router-dom";
 
 function FilterComponent({filter: {id, name}}: {filter: Filter})  {
     const [values, setValues] = useState<FilterOption[]>([])
     const [searchParams, setSearchParams] = useSearchParams()
+    const { categoryName } = useParams()
 
     useEffect(() => {
+        if(categoryName) searchParams.set("category", categoryName)
         getFilterValues()
-    }, [])
+    }, [searchParams])
 
     function getFilterValues() {
         if(!id) return;
 
-        FilterOptionApi.getValuesByFilterId(id)
+        FilterValueApi.getValuesByFilterIdAndProductCriteria(id, searchParams)
             .then(values => setValues(values))
     }
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.jpaEcommerceServer.model.criteria.FilterValueCriteria;
+import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
 import com.example.jpaEcommerceServer.model.entity.FilterValue;
 import com.example.jpaEcommerceServer.model.entity.Product;
 import com.example.jpaEcommerceServer.model.response.FilterValueAmount;
@@ -26,7 +27,7 @@ public class FilterValueService {
     private final ProductRepository productRepository;
 
     // Get the filter values by filter id, and mapped these to a FilterValueAmount list
-    public List<FilterValueAmount> getFilterValueAmountByFilterId(FilterValueCriteria filterValueCriteria) {
+    public List<FilterValueAmount> getFilterValueAmountByFilterId(FilterValueCriteria filterValueCriteria, ProductCriteria productCriteria) {
         
         Specification<FilterValue> spec = FilterValueSpecification.byFilterId(filterValueCriteria.getFilterId());
         // we get all the filter values by their filter id
@@ -44,7 +45,7 @@ public class FilterValueService {
             Optional<FilterValueAmount> exists = list.stream().filter(l -> l.getValue().equals(filterValue.getValue())).findAny();
 
             if(!exists.isPresent()) {
-                Specification<Product> productSpec = ProductSpecification.productsByFilterValue(filterValue.getValue(), filterValueCriteria.getFilterId());
+                Specification<Product> productSpec = ProductSpecification.productsByFilterValueAndCriteria(filterValue.getValue(), filterValueCriteria.getFilterId(), productCriteria);
                 List<Product> products = productRepository.findAll(productSpec);
 
                 FilterValueAmount newFilterValueAmount = new FilterValueAmount(filterValue.getValue(), products.size());

@@ -66,7 +66,7 @@ public class ProductSpecification {
     }
 
     // Based on a filter value, like "civic" to the model filter, this method get all the products with that criteria
-    public static Specification<Product> productsByFilterValue(String filterValue, Long filterId) {
+    public static Specification<Product> productsByFilterValueAndCriteria(String filterValue, Long filterId, ProductCriteria productCriteria) {
         return (Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -77,6 +77,11 @@ public class ProductSpecification {
                 criteriaBuilder.equal(filterValueJoin.get(FilterValue_.FILTER).get(Filter_.ID), filterId)
             );
             predicates.add(p1FilterValuePredicate);
+            
+            if(productCriteria != null) {
+                Predicate urlParamsPredicate = productsByCriteria(productCriteria).toPredicate(root, query, criteriaBuilder);
+                predicates.add(urlParamsPredicate);
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
