@@ -18,3 +18,38 @@
   border: 1px solid;
   margin: 0 auto;
 }
+
+.select-values {
+  display: flex; 
+  align-items: center; 
+  flex-wrap: wrap;
+}
+
+.select-values * {
+  margin: 0;
+}
+
+.select-values div {
+  display: flex;
+  border: 1px solid white; 
+  padding: 1px 5px; 
+  margin: 1px;
+  position: relative;
+}
+
+.deselect-value-btn {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  position: absolute;
+  top: -11px;
+  right: -12px;
+  background-color: white;
+  color: #242424;
+  opacity: 0;
+}
+
+.select-values:hover .deselect-value-btn {
+  opacity: 1;
+}

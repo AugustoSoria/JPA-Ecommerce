@@ -1,5 +1,5 @@
 X The Filters should consider the products criteria
-_ If the filter value has not product the value should be hidden
-_ If the filter is selected should be hidden
+X If the filter value has not product the value should be hidden
+X If the filter is selected should be hidden
 _ Handle errors
 _ Improve CSS

@@ -34,13 +34,14 @@ function FilterComponent({filter: {id, name}}: {filter: Filter})  {
     }
 
     if(!values.length) return;
+    if(searchParams.get(name)) return;
     
     return (
         <>
             <h3>{name}</h3>
             {
                 values.map(({value, amount}, index) => (
-                    <div key={index}>
+                    amount != 0 && <div key={index}>
                         <input 
                             type="radio" 
                             id={value} 
