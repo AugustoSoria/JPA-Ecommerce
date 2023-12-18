@@ -1,26 +1,20 @@
 import { Category } from "../model/Category"
+import { apiOptions, handleCreateResponse, handleResponse } from "../utils/api"
 
 const URL_BASE = "http://localhost:8080/api/category"
-        
-const options: RequestInit = {
-    method: "GET",
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: null
-}
 
 export const categoryApi = {
     getCategories: (): Promise<Category[]> => {
 
         return fetch(URL_BASE)
-            .then((res) => res.json())
+            .then(res => handleResponse(res))
     },
-    create: (category: Category): Promise<Response> => {
+    create: (category: Category): Promise<string> => {
 
-        options.method = "POST"
-        options.body = JSON.stringify(category)
+        apiOptions.method = "POST"
+        apiOptions.body = JSON.stringify(category)
 
-        return fetch(URL_BASE + "/create", options)
+        return fetch(URL_BASE + "/create", apiOptions)
+            .then(res => handleCreateResponse(res))
     }
 }

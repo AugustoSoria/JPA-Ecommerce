@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Product } from "../model/Product";
-import { productApi } from "../api/productApi";
+import { Product } from "../../../model/Product";
+import { productApi } from "../../../api/productApi";
 import ProductCard from "./ProductCard";
 import { useParams, useSearchParams } from "react-router-dom";
 

@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
-import { categoryApi } from "../../api/categoryApi";
-import { Filter } from "../../model/Filter";
-import { Category } from "../../model/Category";
-import { filterApi } from "../../api/filterApi";
+import { categoryApi } from "../../../api/categoryApi";
+import { Filter } from "../../../model/Filter";
+import { Category } from "../../../model/Category";
+import { filterApi } from "../../../api/filterApi";
+import Spinner from "../../shared/Spinner";
+import NotiModal from "../../shared/NotiModal";
 
 function CreaterFilter() {
     const [categories, setCategories] = useState<Category[]>([])
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
 
+    const [successMsg, setSuccessMsg] = useState<string>()
+    const [errorMsg, setErrorMsg] = useState<string>()
+    const [loading, setLoading] = useState<boolean>(true)
+
     useEffect(() => {
         categoryApi.getCategories()
             .then(categories => setCategories(categories))
+            .catch((err: Error) => setErrorMsg(err.message))
+            .finally(() => setLoading(false))
     }, [])
 
     function create(event: React.ChangeEvent<HTMLFormElement>) {
@@ -22,8 +30,11 @@ function CreaterFilter() {
             filterCategory: selectedCategories
         }
 
+        setLoading(true)
         filterApi.create(newFilter)
-            .then(resp => resp.ok ? console.log("Filter created") : console.log("Filter not created"))
+            .then((res) => setSuccessMsg(res))
+            .catch((err: Error) => setErrorMsg(err.message))
+            .finally(() => setLoading(false))
 
     }
 
@@ -65,6 +76,9 @@ function CreaterFilter() {
 
                 <button type="submit">create</button>
             </form>
+            {loading && <Spinner />}
+            {successMsg && <NotiModal msg={successMsg} />}
+            {errorMsg && <NotiModal msg={errorMsg} errorColor={true} />}
         </section>
     );
 }

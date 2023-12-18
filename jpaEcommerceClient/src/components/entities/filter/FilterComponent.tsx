@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Filter } from "../model/Filter";
-import { FilterOption } from "../model/FilterOption";
-import { FilterValueApi } from "../api/filterValueApi";
+import { Filter } from "../../../model/Filter";
+import { FilterOption } from "../../../model/FilterOption";
+import { FilterValueApi } from "../../../api/filterValueApi";
 import { useParams, useSearchParams } from "react-router-dom";
 
 function FilterComponent({filter: {id, name}}: {filter: Filter})  {

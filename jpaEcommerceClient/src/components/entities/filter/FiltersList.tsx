@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Filter } from "../model/Filter";
+import { Filter } from "../../../model/Filter";
 import { useParams, useSearchParams } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
-import { filterApi } from "../api/filterApi";
+import { filterApi } from "../../../api/filterApi";
 
 function FiltersList()  {
     const [filters, setFilters] = useState<Filter[]>([])

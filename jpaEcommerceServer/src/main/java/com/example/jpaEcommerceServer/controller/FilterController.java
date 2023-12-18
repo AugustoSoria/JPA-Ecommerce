@@ -2,6 +2,8 @@ package com.example.jpaEcommerceServer.controller;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,17 +26,32 @@ public class FilterController {
     	 
     @GetMapping()
     public ResponseEntity<List<Filter>> getAll() {
-        return ResponseEntity.ok(filterService.getAll());
+        try {
+            return ResponseEntity.ok(filterService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
     
     @GetMapping("byCriteria")
     public ResponseEntity<List<Filter>> getAllByCriteria(FilterCriteria criteria) {
-        return ResponseEntity.ok(filterService.getAllByCriteria(criteria));
+        try {
+            return ResponseEntity.ok(filterService.getAllByCriteria(criteria));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @PostMapping("create")
-    public ResponseEntity<Filter> save(@RequestBody Filter filter) {
-        return ResponseEntity.ok(filterService.save(filter));
+    public ResponseEntity<String> save(@RequestBody Filter filter) {
+        try {
+            filterService.save(filter);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Filter created");
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong Filter");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+        }
     }
     
 }

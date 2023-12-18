@@ -1,4 +1,4 @@
-import { Product } from "../model/Product";
+import { Product } from "../../../model/Product";
 
 type Props = {product: Product}
 

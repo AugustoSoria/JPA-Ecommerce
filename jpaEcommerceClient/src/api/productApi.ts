@@ -1,26 +1,20 @@
 import { Product } from "../model/Product"
+import { apiOptions, handleCreateResponse, handleResponse } from "../utils/api"
 
 const URL_BASE = "http://localhost:8080/api/product"
 
-const options: RequestInit = {
-    method: "GET",
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: null
-}
-
 export const productApi = {
-    create: (product: Product): Promise<Response> => {
+    create: (product: Product): Promise<string> => {
 
-        options.method = "POST" 
-        options.body = JSON.stringify(product)
+        apiOptions.method = "POST" 
+        apiOptions.body = JSON.stringify(product)
 
-        return fetch(URL_BASE + "/create", options)
+        return fetch(URL_BASE + "/create", apiOptions)
+            .then(res => handleCreateResponse(res))
     },
     getProductsBySearchCriteria: (criteria: URLSearchParams): Promise<Product[]> => {
 
         return fetch(URL_BASE + "/byCriteria?" + criteria.toString())
-            .then(resp => resp.json())
+            .then(res => handleResponse(res))
     },
 }

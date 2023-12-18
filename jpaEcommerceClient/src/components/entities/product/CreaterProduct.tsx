@@ -1,22 +1,29 @@
 import { useState, useEffect } from "react";
-import { Category } from "../../model/Category";
-import { Filter } from "../../model/Filter";
-import { categoryApi } from "../../api/categoryApi";
-import { filterApi } from "../../api/filterApi";
-import { Product } from "../../model/Product";
-import { productApi } from "../../api/productApi";
+import { Category } from "../../../model/Category";
+import { Filter } from "../../../model/Filter";
+import { categoryApi } from "../../../api/categoryApi";
+import { filterApi } from "../../../api/filterApi";
+import { Product } from "../../../model/Product";
+import { productApi } from "../../../api/productApi";
+import NotiModal from "../../shared/NotiModal";
+import Spinner from "../../shared/Spinner";
 
-function createrProduct() {
+function CreaterProduct() {
     const [categories, setCategories] = useState<Category[]>([])
     const [selectedCategory, setSelectedCategory] = useState<Category>()
     const [filters, setFilters] = useState<Filter[]>([])
 
-    useEffect(() => {
-        categoryApi.getCategories()
-            .then(categories => setCategories(categories))
+    const [successMsg, setSuccessMsg] = useState<string>()
+    const [errorMsg, setErrorMsg] = useState<string>()
+    const [loading, setLoading] = useState<boolean>(true)
 
-        filterApi.getFilters()
-            .then(filters => setFilters(filters))
+    useEffect(() => {
+        Promise.all([categoryApi.getCategories(), filterApi.getFilters()])
+            .then(resp => {
+                setCategories(resp[0])
+                setFilters(resp[1])
+            })
+            .finally(() => setLoading(false))
     }, [])
 
     function handleChangeOption(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -45,11 +52,12 @@ function createrProduct() {
             category: selectedCategory,
             filterValues
         }
-        console.log("newProduct: ")
-        console.log(newProduct)
 
+        setLoading(true)
         productApi.create(newProduct)
-            .then(resp => resp.ok ? console.log("Product created") : console.log("Product not created"))
+            .then((res) => setSuccessMsg(res))
+            .catch((err: Error) => setErrorMsg(err.message))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -89,8 +97,11 @@ function createrProduct() {
 
                 <button type="submit">create</button>
             </form>
+            {loading && <Spinner />}
+            {successMsg && <NotiModal msg={successMsg} />}
+            {errorMsg && <NotiModal msg={errorMsg} errorColor={true} />}
         </section>
     );
 }
 
-export default createrProduct;
+export default CreaterProduct;

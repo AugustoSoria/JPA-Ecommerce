@@ -1,5 +1,5 @@
-import FiltersList from "../FiltersList";
-import ProductsList from "../ProductsList";
+import FiltersList from "../entities/filter/FiltersList";
+import ProductsList from "../entities/product/ProductsList";
 
 function HomePage() {
     return (

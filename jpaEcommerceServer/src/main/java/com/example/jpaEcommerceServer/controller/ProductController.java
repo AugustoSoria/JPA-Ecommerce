@@ -2,7 +2,10 @@ package com.example.jpaEcommerceServer.controller;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,18 +27,32 @@ public class ProductController {
     
     @GetMapping()
     public ResponseEntity<List<Product>> getAll() {
-        return ResponseEntity.ok(productService.getAll());
+        try {
+            return ResponseEntity.ok(productService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @GetMapping("byCriteria") 
     public ResponseEntity<List<Product>> getAllByCriteria(ProductCriteria criteria) {
-        List<Product> products = productService.getAllByCriteria(criteria);
-        return ResponseEntity.ok(products);
+        try {
+            return ResponseEntity.ok(productService.getAllByCriteria(criteria));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
     
     @PostMapping("create")
-    public ResponseEntity<Product> save(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
+    public ResponseEntity<String> save(@RequestBody Product product) {
+        try {
+            productService.save(product);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Product Created");
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong Product");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+        }
     }
     
 }

@@ -2,6 +2,7 @@ package com.example.jpaEcommerceServer.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,10 @@ public class FilterValueController {
 
     @GetMapping("values-amount-by-filter-id")
     public ResponseEntity<List<FilterValueAmount>> getFilterValueAmountByFilterId(FilterValueCriteria criteria, ProductCriteria productCriteria) {
-        System.out.println("productCriteria");
-        System.out.println(productCriteria);
-        System.out.println("FilterValueCriteria");
-        System.out.println(criteria);
-        List<FilterValueAmount> map = filterValueService.getFilterValueAmountByFilterId(criteria, productCriteria);
-        return ResponseEntity.ok(map);
+        try {
+            return ResponseEntity.ok(filterValueService.getFilterValueAmountByFilterId(criteria, productCriteria));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     } 
 }

@@ -2,6 +2,8 @@ package com.example.jpaEcommerceServer.controller;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +25,23 @@ public class CategoryController {
     	 
     @GetMapping()
     public ResponseEntity<List<Category>> getAll() {
-        return ResponseEntity.ok(categoryService.getAll());
+        try {
+            return ResponseEntity.ok(categoryService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 	 
     @PostMapping("create")
-    public ResponseEntity<Category> save(@RequestBody Category category) {
-        return ResponseEntity.ok(categoryService.save(category));
+    public ResponseEntity<String> save(@RequestBody Category category) {
+        try {
+            categoryService.save(category);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Category created");
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong category");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+        }
     }
     
 }
