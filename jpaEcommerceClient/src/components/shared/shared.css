@@ -1,0 +1,91 @@
+/* #### NOTI MODAL ### */
+
+.noti-modal {
+    width: 100%;
+    max-width: 300px;
+    min-width: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #0404044f;
+    color: var(--black);
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 4px 6px 17px -6px rgba(0,0,0,0.59);
+    animation: showUp 3s alternate forwards;
+}
+
+.noti-modal * {
+    margin: 0;
+}
+
+.noti-modal span {
+    width: 3px;
+    height: 27px;
+}
+
+.noti-modal p {
+    font-weight: 400;
+}
+
+.noti-modal hr {
+    height: 20px;
+}
+
+.noti-modal h5 {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+@keyframes showUp {
+    0% {
+        bottom: -100%;
+    }
+
+    75% {
+        bottom: 5%;
+    }
+
+    100% {
+        bottom: 5%;
+    }
+}
+
+/* #### SPINNER ### */
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid var(--white);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.overlay {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--overlay-bg);
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

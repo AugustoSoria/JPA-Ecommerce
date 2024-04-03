@@ -3,6 +3,7 @@ import { Filter } from "../../../model/Filter";
 import { useParams, useSearchParams } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
 import { filterApi } from "../../../api/filterApi";
+import './filter.css';
 
 function FiltersList()  {
     const [filters, setFilters] = useState<Filter[]>([])
@@ -31,14 +32,16 @@ function FiltersList()  {
                     [...searchParams.keys()]
                         .map((k, i) => 
                             <div key={i}>
-                                <h5 className="deselect-value-btn" onClick={() => deselectValue(k)}>X</h5>
+                                <button className="deselect-value-btn" onClick={() => deselectValue(k)}>
+                                    <h5>X</h5>
+                                </button>
                                 <h4>{searchParams.get(k)}</h4>
                             </div>
                         )
                 }
             </div>
             {filters.map(f =>  (
-                <div key={f.id} style={{display: "flex", flexDirection: "column"}}>
+                <div key={f.id} className="FiltersList">
                     <FilterComponent filter={f}/>
                 </div>
             ))}

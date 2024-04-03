@@ -1,3 +1,5 @@
+import './shared.css';
+
 function Spinner() {
     return (
         <div className="overlay">

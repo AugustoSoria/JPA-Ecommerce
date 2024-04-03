@@ -1,9 +1,10 @@
 import FiltersList from "../entities/filter/FiltersList";
 import ProductsList from "../entities/product/ProductsList";
+import './pages.css'
 
 function HomePage() {
     return (
-        <section style={{display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "20px"}}>
+        <section className="HomePage">
             <FiltersList />
             <ProductsList/>
         </section>

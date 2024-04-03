@@ -1,0 +1,58 @@
+
+.NavBar {
+    background-color: var(--violet);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.NavBar h4 {
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.NavBar ul {
+    position: absolute;
+    padding: 0 1.8em;
+    margin: 0.4em;
+    background-color: var(--black);
+    border-radius: 5px;
+}
+
+.NavBar a {
+    color: var(--white);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.NavBarContent {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+div.catTitleWrapper {
+    min-height: 2em;
+}
+
+div.catTitleWrapper h4 {
+    margin: 0;
+    margin-left: 1em;
+}
+
+div.catTitleWrapper ul.arrow {
+    display: none;
+}
+
+div.catTitleWrapper:hover ul.arrow {
+    display: block;
+}
+
+.catTitle {
+    display: inline;
+    vertical-align: middle;
+}
