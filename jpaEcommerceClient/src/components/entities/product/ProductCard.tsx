@@ -1,13 +1,17 @@
 import { Product } from "../../../model/Product";
+import { AR$Formater } from "../../../utils/formater";
+import './product.css';
 
 type Props = {product: Product}
 
 function ProductCard({product}: Props) {
-    return (
-        <div style={{maxWidth: "200px", border: "1px solid #605555", overflow: "hidden"}}>
-                <img style={{width: "200px"}} src="https://p.kindpng.com/picc/s/603-6033059_amazon-advertising-icon-png-transparent-png.png"/>
-                <h3 style={{textAlign: "start"}}>{product.name}</h3>
-                <h3 style={{textAlign: "end"}}>{product.price}</h3>
+    return (    
+        <div className="ProductCard">
+            <div className="image-container">
+                <img src="https://cdn1.iconfinder.com/data/icons/e-commerce-set-2-1/256/Box-512.png"/>
+            </div>
+            <h4>{product.name}</h4>
+            <h3>{AR$Formater(product.price)}</h3>
         </div>);
 }
 

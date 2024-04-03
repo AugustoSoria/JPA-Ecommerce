@@ -5,6 +5,7 @@ import { Category } from "../../../model/Category";
 import { filterApi } from "../../../api/filterApi";
 import Spinner from "../../shared/Spinner";
 import NotiModal from "../../shared/NotiModal";
+import './filter.css';
 
 function CreaterFilter() {
     const [categories, setCategories] = useState<Category[]>([])

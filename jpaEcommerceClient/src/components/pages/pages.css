@@ -1,0 +1,8 @@
+.HomePage {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1220px;
+    padding-left: 1em;
+}

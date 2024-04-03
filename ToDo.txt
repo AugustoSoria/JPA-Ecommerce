@@ -2,6 +2,10 @@ X The Filters should consider the products criteria
 X If the filter value has not product the value should be hidden
 X If the filter is selected should be hidden
 X Handle errors
-_ Improve CSS
-_ Add images to products and categories
+X Improve CSS
 _ Add a range filter
+_ Add images to products and categories
+_ Product page
+
+
+SOLAMENTE FALTA POBLAR LAS TABLAS EN EL INIT.SQL

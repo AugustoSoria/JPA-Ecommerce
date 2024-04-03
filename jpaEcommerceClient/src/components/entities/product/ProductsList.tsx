@@ -3,6 +3,7 @@ import { Product } from "../../../model/Product";
 import { productApi } from "../../../api/productApi";
 import ProductCard from "./ProductCard";
 import { useParams, useSearchParams } from "react-router-dom";
+import './product.css';
 
 function ProductsList() {
     const [products, setProducts] = useState<Product[]>([])
@@ -24,7 +25,7 @@ function ProductsList() {
     if(!products.length) return;
 
     return (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 200px)", gridGap: "10px", gridAutoRows: "minmax(100px, auto)" }}>
+        <div className="ProductsList">
             {products.map(p => <ProductCard key={p.id} product={p}/>)}
         </div>
     );

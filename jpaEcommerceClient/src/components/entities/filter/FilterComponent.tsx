@@ -3,6 +3,7 @@ import { Filter } from "../../../model/Filter";
 import { FilterOption } from "../../../model/FilterOption";
 import { FilterValueApi } from "../../../api/filterValueApi";
 import { useParams, useSearchParams } from "react-router-dom";
+import './filter.css';
 
 function FilterComponent({filter: {id, name}}: {filter: Filter})  {
     const [values, setValues] = useState<FilterOption[]>([])
@@ -38,7 +39,7 @@ function FilterComponent({filter: {id, name}}: {filter: Filter})  {
     
     return (
         <>
-            <h3>{name}</h3>
+            <h3 className="filter-name">{name}</h3>
             {
                 values.map(({value, amount}, index) => (
                     amount != 0 && <div key={index}>

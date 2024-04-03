@@ -1,0 +1,58 @@
+.select-values {
+    display: flex; 
+    align-items: center; 
+    flex-wrap: wrap;
+    color: var(--black);
+}
+
+.select-values * {
+    margin: 0;
+}
+
+.select-values > div {
+    display: flex;
+    border: 1px solid; 
+    padding: 1px 5px; 
+    margin: 1px;
+    position: relative;
+}
+
+.deselect-value-btn {
+    cursor: pointer;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    position: absolute;
+    top: -11px;
+    right: -9px;
+    background-color: var(--black);
+    color: var(--white);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+}
+
+.select-values:hover .deselect-value-btn {
+    opacity: 1;
+}
+
+.FiltersList {
+    display: flex;
+    flex-direction: column;
+    color: var(--black);
+}
+
+.FiltersList .filter-name {
+    text-transform: capitalize;
+}
+
+.FiltersList input {
+    display: none;
+}
+
+.FiltersList label {
+    cursor: pointer;
+}

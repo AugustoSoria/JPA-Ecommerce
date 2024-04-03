@@ -7,6 +7,7 @@ import { Product } from "../../../model/Product";
 import { productApi } from "../../../api/productApi";
 import NotiModal from "../../shared/NotiModal";
 import Spinner from "../../shared/Spinner";
+import './product.css';
 
 function CreaterProduct() {
     const [categories, setCategories] = useState<Category[]>([])
