@@ -41,15 +41,12 @@ CREATE TABLE IF NOT EXISTS product (
     FOREIGN KEY(`category_id`) REFERENCES `category`(`id`)
 );
 
-    -- PRIMARY KEY (product_id, filter_value_id)
 CREATE TABLE IF NOT EXISTS product_filter_value (
     product_id bigint(20),
     filter_value_id bigint(20),
     FOREIGN KEY(`product_id`) REFERENCES `product`(`id`),
     FOREIGN KEY(`filter_value_id`) REFERENCES `filter_value`(`id`)
 );
-
--- jpaecommerceserver-mysql-ec-1  | 2024-04-02T01:32:47.945997Z 6 [ERROR] [MY-000061] [Server] 1060  Duplicate column name '1'.
 
 INSERT INTO category (name) 
 SELECT * FROM (SELECT 'vehicle') AS tmp
@@ -65,18 +62,7 @@ SELECT * FROM (SELECT false, 'year') AS tmp
 WHERE NOT EXISTS (SELECT name FROM filter WHERE name = 'year');
 
 
--- INSERT INTO filter_category (filter_id, category_id)
--- SELECT * FROM (SELECT 1, 1) AS tmp 
--- WHERE NOT EXISTS (SELECT filter_id, category_id FROM filter_category WHERE filter_id = 1 AND category_id = 1);
--- INSERT INTO filter_category (filter_id, category_id) VALUES (1, 1)
--- ON DUPLICATE KEY UPDATE filter_id = 1 AND category_id = 1;
 REPLACE INTO filter_category (filter_id, category_id) VALUES (1, 1);
-
--- INSERT INTO filter_category (filter_id, category_id) 
--- SELECT * FROM (SELECT 2, 1) AS tmp 
--- WHERE NOT EXISTS (SELECT filter_id, category_id FROM filter_category WHERE filter_id = 2 AND category_id = 1);
--- INSERT INTO filter_category (filter_id, category_id) VALUES (2, 1)
--- ON DUPLICATE KEY UPDATE filter_id = 2 AND category_id = 1;
 REPLACE INTO filter_category (filter_id, category_id) VALUES (2, 1);
 
 
@@ -93,40 +79,8 @@ INSERT INTO filter_value (value, filter_id)
 SELECT * FROM (SELECT '2019', 2) AS tmp
 WHERE NOT EXISTS (SELECT value FROM filter_value WHERE value = '2019');
 
-
--- INSERT INTO product_filter_value (product_id, filter_value_id)
--- SELECT * FROM (SELECT 1, 1) AS tmp 
--- WHERE NOT EXISTS (SELECT product_id, filter_value_id FROM product_filter_value WHERE product_id = 1 AND filter_value_id = 1);
 INSERT INTO product_filter_value (product_id, filter_value_id) VALUES (1, 1)
 ON DUPLICATE KEY UPDATE product_id = 1 AND filter_value_id = 1;
 
--- INSERT INTO product_filter_value (product_id, filter_value_id) 
--- SELECT * FROM (SELECT 1, 2) AS tmp 
--- WHERE NOT EXISTS (SELECT product_id, filter_value_id FROM product_filter_value WHERE product_id = 1 AND filter_value_id = 2);
 INSERT INTO product_filter_value (product_id, filter_value_id) VALUES (1, 2)
 ON DUPLICATE KEY UPDATE product_id = 1 AND filter_value_id = 2;
-
-/*
-    INSERT INTO category (id, name) VALUES (1, 'vehicle')
-        ON DUPLICATE KEY UPDATE id = 1;
-
-    INSERT INTO filter (id, is_range, name) VALUES (1, false, 'model')
-        ON DUPLICATE KEY UPDATE id = 1;
-    INSERT INTO filter (id, is_range, name) VALUES (2, false, 'year')
-        ON DUPLICATE KEY UPDATE id = 2;
-
-    INSERT INTO filter_category (filter_id,category_id) VALUES (1, 1);
-    INSERT INTO filter_category (filter_id,category_id) VALUES (2, 1);
-
-    INSERT INTO product (id, name, price, price_in_usd, category_id) 
-        VALUES (1,'Chevrolet Tracker', 18890900, false, 1)
-        ON DUPLICATE KEY UPDATE id = 1;
-
-    INSERT INTO filter_value (id, value, filter_id) VALUES (1, 'Tracker', 1)
-        ON DUPLICATE KEY UPDATE id = 1;
-    INSERT INTO filter_value (id, value, filter_id) VALUES (2, '2019', 2)
-        ON DUPLICATE KEY UPDATE id = 2;
-
-    INSERT INTO product_filter_value (product_id, filter_value_id) VALUES (1, 1);
-    INSERT INTO product_filter_value (product_id, filter_value_id) VALUES (1, 2);
-*/
