@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+      
+    <include file="config/liquibase/20240403041524_added_entity_Category.xml" />
+    <include file="config/liquibase/20240403043324_added_entity_Filter.xml" />
+    <include file="config/liquibase/20240403043325_added_entity_Filter_Category.xml" />
+    <include file="config/liquibase/20240403043326_added_entity_Filter_Value.xml" />
+    <include file="config/liquibase/20240403043327_added_entity_Product.xml" />
+    <include file="config/liquibase/20240403043328_added_entity_Product_Filter_Value.xml" />
+</databaseChangeLog>
