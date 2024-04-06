@@ -35,7 +35,7 @@ function CreaterProduct() {
 
     function create(event: React.ChangeEvent<HTMLFormElement>) {
         event.preventDefault()
-        if(!selectedCategory) return;
+        // if(!selectedCategory) return;
 
         const filterValues: any = []
 
@@ -46,11 +46,12 @@ function CreaterProduct() {
             })
         })
 
+        // category: selectedCategory,
         const newProduct: Product = {
             name: event.target.productName.value,
             price: event.target.price.value.replace(/\./g, ""),
             priceInUsd: event.target.usd.checked,
-            category: selectedCategory,
+            category: { id: 1, name: "vehicle" },
             filterValues
         }
 
@@ -63,41 +64,44 @@ function CreaterProduct() {
 
     return (
         <section>
-            <form className="create-form" onSubmit={create}>
-                <label htmlFor="productName">name</label>
-                <input type="text" name="productName" id="name" />
+            <fieldset style={{color: "var(--black)"}}>
+                <legend>Create Vehicle</legend>
+                <form className="create-form" onSubmit={create}>
+                    <label htmlFor="productName">name</label>
+                    <input type="text" name="productName" id="name" />
 
-                <label htmlFor="price">price</label>
-                <input type="number" name="price" id="price" />
-                <div style={{display: "flex"}}>
-                    <input type="radio" name="priceCurrency" id="arg" value="arg" defaultChecked />
-                    <label htmlFor="arg">ARG</label>
+                    <label htmlFor="price">price</label>
+                    <input type="number" name="price" id="price" />
+                    <div style={{display: "flex"}}>
+                        <input type="radio" name="priceCurrency" id="arg" value="arg" defaultChecked />
+                        <label htmlFor="arg">ARG</label>
 
-                    <input type="radio" name="priceCurrency" id="usd" value="usd" />
-                    <label htmlFor="usd">USD</label>
-                </div>
+                        <input type="radio" name="priceCurrency" id="usd" value="usd" />
+                        <label htmlFor="usd">USD</label>
+                    </div>
 
-                <label htmlFor="category">category</label>
-                <select name="category" onChange={(e) => handleChangeOption(e)} defaultValue="">
-                    <option value="" disabled>Choose a category</option>
-                    {
-                        categories.map(c => 
-                            <option key={c.id} value={c.id}>{c.name}</option>)
+                    {/* <label htmlFor="category">category</label>
+                    <select name="category" onChange={(e) => handleChangeOption(e)} defaultValue="">
+                        <option value="" disabled>Choose a category</option>
+                        {
+                            categories.map(c => 
+                                <option key={c.id} value={c.id}>{c.name}</option>)
+                        }
+                    </select> */}
+
+                    {   
+                        filters.length ?
+                        filters.map(f => (
+                            <div key={f.id} style={{display: "flex", flexDirection: "column"}}>
+                                <label htmlFor={f.name}>{f.name}</label>
+                                <input type="text" name={f.name} id={f.name} />
+                            </div>
+                        )) : <h4>No se encontraron filtros</h4>
                     }
-                </select>
 
-                {   
-                    filters.length ?
-                    filters.map(f => (
-                        <div key={f.id} style={{display: "flex", flexDirection: "column"}}>
-                            <label htmlFor={f.name}>{f.name}</label>
-                            <input type="text" name={f.name} id={f.name} />
-                        </div>
-                    )) : <h4>No se encontraron filtros</h4>
-                }
-
-                <button type="submit">create</button>
-            </form>
+                    <button type="submit">create</button>
+                </form>
+            </fieldset>
             {loading && <Spinner />}
             {successMsg && <NotiModal msg={successMsg} />}
             {errorMsg && <NotiModal msg={errorMsg} errorColor={true} />}
