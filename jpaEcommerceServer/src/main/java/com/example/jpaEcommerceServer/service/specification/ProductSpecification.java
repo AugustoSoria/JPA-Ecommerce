@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.example.jpaEcommerceServer.model.FiltersName;
+import com.example.jpaEcommerceServer.model.FilterNames;
 import com.example.jpaEcommerceServer.model.criteria.ProductCriteria;
 import com.example.jpaEcommerceServer.model.entity.Filter;
 import com.example.jpaEcommerceServer.model.entity.FilterValue;
@@ -39,11 +39,11 @@ public class ProductSpecification {
                 }
                 /* A specification to get products based in the filter value,
                     for example all products which model is "civic" */
-                if(productCriteria.getModel() != null) {                    
+                if(productCriteria.getModel() != null) {
                     Join<Product, FilterValue> filterValueJoin = root.join(Product_.FILTER_VALUES, JoinType.INNER);
                     Join<FilterValue, Filter> filterJoin = filterValueJoin.join(FilterValue_.FILTER);
 
-                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FiltersName.MODEL.name());
+                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FilterNames.MODEL.name());
                     Predicate predicateFilterValue = criteriaBuilder.like(filterValueJoin.get(FilterValue_.VALUE), productCriteria.getModel());
 
                     urlParamsPredicates.add(predicateFilterName);
@@ -53,11 +53,43 @@ public class ProductSpecification {
                     Join<Product, FilterValue> filterValueJoin = root.join(Product_.FILTER_VALUES, JoinType.INNER);
                     Join<FilterValue, Filter> filterJoin = filterValueJoin.join(FilterValue_.FILTER);
 
-                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FiltersName.TRANSMISSION.name());
+                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FilterNames.TRANSMISSION.name());
                     Predicate predicateFilterValue = criteriaBuilder.like(filterValueJoin.get(FilterValue_.VALUE), productCriteria.getTransmission());
 
                     urlParamsPredicates.add(predicateFilterName);
                     urlParamsPredicates.add(predicateFilterValue);
+                }
+                if(productCriteria.getBrand() != null) {
+                    Join<Product, FilterValue> filterValueJoin = root.join(Product_.FILTER_VALUES, JoinType.INNER);
+                    Join<FilterValue, Filter> filterJoin = filterValueJoin.join(FilterValue_.FILTER);
+
+                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FilterNames.BRAND.name());
+                    Predicate predicateFilterValue = criteriaBuilder.like(filterValueJoin.get(FilterValue_.VALUE), productCriteria.getBrand());
+
+                    urlParamsPredicates.add(predicateFilterName);
+                    urlParamsPredicates.add(predicateFilterValue);
+                }
+                if(productCriteria.getYear() != null) {
+                    Join<Product, FilterValue> filterValueJoin = root.join(Product_.FILTER_VALUES, JoinType.INNER);
+                    Join<FilterValue, Filter> filterJoin = filterValueJoin.join(FilterValue_.FILTER);
+
+                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FilterNames.YEAR.name());
+                    Predicate predicateFilterValue = criteriaBuilder.like(filterValueJoin.get(FilterValue_.VALUE), productCriteria.getYear());
+
+                    urlParamsPredicates.add(predicateFilterName);
+                    urlParamsPredicates.add(predicateFilterValue);
+
+                }
+                if(productCriteria.getCondition() != null) {
+                    Join<Product, FilterValue> filterValueJoin = root.join(Product_.FILTER_VALUES, JoinType.INNER);
+                    Join<FilterValue, Filter> filterJoin = filterValueJoin.join(FilterValue_.FILTER);
+
+                    Predicate predicateFilterName = criteriaBuilder.equal(filterJoin.get(Filter_.NAME), FilterNames.CONDITION.name());
+                    Predicate predicateFilterValue = criteriaBuilder.like(filterValueJoin.get(FilterValue_.VALUE), productCriteria.getCondition());
+
+                    urlParamsPredicates.add(predicateFilterName);
+                    urlParamsPredicates.add(predicateFilterValue);
+
                 }
             }
             

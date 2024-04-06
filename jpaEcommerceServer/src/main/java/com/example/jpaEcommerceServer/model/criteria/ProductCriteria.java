@@ -10,4 +10,8 @@ public class ProductCriteria {
     private String category;
     private String model;
     private String transmission;
+    private String brand;
+    private String year;
+    private String condition;
+    private String ubication;
 }
