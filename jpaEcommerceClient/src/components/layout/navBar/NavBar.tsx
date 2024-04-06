@@ -12,7 +12,7 @@ function NavBar() {
                     <Link to={"/"}  className='catTitle'>Home</Link>
                 </div>
                 <div className='d-flex'>
-                    <div className='catTitleWrapper'>
+                    {/* <div className='catTitleWrapper'>
                         <h4  className='catTitle'>Categories</h4>
                         {
                             <ul className='arrow'>
@@ -23,7 +23,7 @@ function NavBar() {
                                 ))}
                             </ul>
                         }
-                    </div>
+                    </div> */}
                     <div className='catTitleWrapper'>
                         {/* <Link to={"/login"}  className='catTitle'>Login</Link>  */}
                     </div>
@@ -34,12 +34,12 @@ function NavBar() {
                                 <li>
                                     <Link to={"product/create"}>Create Product</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link to={"category/create"}>Create Category</Link>
                                 </li>
                                 <li>
                                     <Link to={"filter/create"}>Create Filter</Link>
-                                </li>
+                                </li> */}
                             </ul>
                         }
                     </div>

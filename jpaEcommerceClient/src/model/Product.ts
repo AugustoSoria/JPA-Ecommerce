@@ -6,6 +6,6 @@ export interface Product {
     name: string
     price: number
     category: Category
-    priceInUsd: Boolean
+    priceInUsd: boolean
     filterValues: FilterValue[]
 }

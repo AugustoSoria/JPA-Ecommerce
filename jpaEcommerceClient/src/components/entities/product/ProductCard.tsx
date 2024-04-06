@@ -1,5 +1,5 @@
 import { Product } from "../../../model/Product";
-import { AR$Formater } from "../../../utils/formater";
+import { PriceFormater } from "../../../utils/formater";
 import './product.css';
 
 type Props = {product: Product}
@@ -11,7 +11,7 @@ function ProductCard({product}: Props) {
                 <img src="https://cdn1.iconfinder.com/data/icons/e-commerce-set-2-1/256/Box-512.png"/>
             </div>
             <h4>{product.name}</h4>
-            <h3>{AR$Formater(product.price)}</h3>
+            <h3>{PriceFormater(product.price, product.priceInUsd)}</h3>
         </div>);
 }
 

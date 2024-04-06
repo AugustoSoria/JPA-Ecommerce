@@ -16,14 +16,14 @@ services:
     image: mysql
     ports: 
       - "3306:3306"
-    command: --init-file /data/init.sql 
+    # command: --init-file /data/init.sql 
     environment:
-      - MYSQL_DATABASE=jpa_ecommerce
+      # - MYSQL_DATABASE=jpa_ecommerce
       - MYSQL_ROOT_USER=root # this must be the same than application.properties
       - MYSQL_ROOT_PASSWORD=1234 # this must be the same than application.properties
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./src/main/resources/init.sql:/data/init.sql
+      # - ./src/main/resources/init.sql:/data/init.sql
 
 volumes:
   mysql-data:
